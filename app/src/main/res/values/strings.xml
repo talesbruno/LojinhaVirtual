@@ -2,4 +2,8 @@
     <string name="app_name">LojinhaVirtual</string>
     <string name="off">%1$s% OFF</string>
     <string name="observacoes">Observações:</string>
+    <string name="home">Home</string>
+    <string name="mais">Mais</string>
+    <string name="pedidos">Pedidos</string>
+    <string name="adicionar">Adicionar</string>
 </resources>
