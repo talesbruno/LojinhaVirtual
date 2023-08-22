@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">LojinhaVirtual</string>
+    <string name="off">%1$s% OFF</string>
+    <string name="observacoes">Observações:</string>
+</resources>
