@@ -1,5 +1,6 @@
 package com.example.lojinhavirtual.domain
 
 interface ProductRepository {
-    fun getCategories(): List<Category>
+    suspend fun getCategories(): List<Category>
+    suspend fun getProductForCategory(category: String): List<Product>
 }

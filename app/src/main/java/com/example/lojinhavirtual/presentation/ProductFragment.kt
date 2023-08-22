@@ -30,3 +30,38 @@ class ProductFragment : Fragment() {
         }
     }
 }
+
+class ProdutoFragment : Fragment() {
+
+    private val viewModel: ProdutoViewModel by viewModels()
+    private val categoriaAdapter = CategoriaAdapter { categoriaSelecionada ->
+        viewModel.carregarProdutosPorCategoria(categoriaSelecionada)
+    }
+    private val produtosPorCategoriaAdapter = ProdutosAdapter(emptyList())
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val categoriaRecyclerView: RecyclerView = view.findViewById(R.id.categoriaRecyclerView)
+        val produtosPorCategoriaRecyclerView: RecyclerView = view.findViewById(R.id.produtosPorCategoriaRecyclerView)
+
+        categoriaRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        produtosPorCategoriaRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+        categoriaRecyclerView.adapter = categoriaAdapter
+        produtosPorCategoriaRecyclerView.adapter = produtosPorCategoriaAdapter
+
+        // Carregar categorias
+        viewModel.carregarCategorias()
+
+        // Observar categorias
+        viewModel.categoriasLiveData.observe(viewLifecycleOwner) { categorias ->
+            categoriaAdapter.setCategorias(categorias)
+        }
+
+        // Observar produtos por categoria
+        viewModel.produtosPorCategoriaLiveData.observe(viewLifecycleOwner) { produtos ->
+            produtosPorCategoriaAdapter.atualizarProdutos(produtos)
+        }
+    }
+}
