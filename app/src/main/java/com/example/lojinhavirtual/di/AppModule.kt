@@ -1,0 +1,16 @@
+package com.example.lojinhavirtual.di
+
+import android.content.Context
+import com.example.lojinhavirtual.data.ProductRepositoryImpl
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
+
+@Module
+@InstallIn(SingletonComponent::class)
+class AppModule {
+    @Provides
+    fun provideProductRepository(@ApplicationContext context: Context) = ProductRepositoryImpl(context)
+}

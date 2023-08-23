@@ -8,7 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.example.lojinhavirtual.databinding.DetailsFragmentBinding
 import com.example.lojinhavirtual.databinding.HomeFragmentBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DetailsFragment : Fragment() {
     private var _binding: DetailsFragmentBinding? = null
     private val binding get() = _binding!!
@@ -26,7 +28,10 @@ class DetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
+        binding.detailProductImg.setImageResource(args.model.coverUrl)
+        binding.detailTxtDesc.text = args.model.desc.toString()
+        binding.detailTxtTitle.text = args.model.name
+        binding.detailTxtDescription.text = args.model.name
     }
     override fun onDestroyView() {
         super.onDestroyView()

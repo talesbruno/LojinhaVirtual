@@ -8,9 +8,12 @@ import com.example.lojinhavirtual.domain.Category
 import com.example.lojinhavirtual.domain.GetCategoryUseCase
 import com.example.lojinhavirtual.domain.GetProductForCategoryUseCase
 import com.example.lojinhavirtual.domain.Product
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class ProductViewModel(
+@HiltViewModel
+class ProductViewModel @Inject constructor(
     private val getCategoryUseCase: GetCategoryUseCase,
     private val getProductForCategoryUseCase: GetProductForCategoryUseCase
     ) : ViewModel() {

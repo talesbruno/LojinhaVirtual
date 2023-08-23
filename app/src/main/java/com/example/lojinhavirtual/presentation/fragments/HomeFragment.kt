@@ -15,7 +15,9 @@ import com.example.lojinhavirtual.R
 import com.example.lojinhavirtual.databinding.HomeFragmentBinding
 import com.example.lojinhavirtual.domain.Category
 import com.example.lojinhavirtual.presentation.ProductViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
     private val viewModel: ProductViewModel by viewModels()
     private var _binding: HomeFragmentBinding? = null

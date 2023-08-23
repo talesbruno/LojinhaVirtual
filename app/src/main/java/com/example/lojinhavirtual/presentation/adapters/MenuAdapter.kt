@@ -7,8 +7,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lojinhavirtual.R
 import com.example.lojinhavirtual.domain.Category
+import javax.inject.Inject
 
-class MenuAdapter(private var categories: List<Category>) : RecyclerView.Adapter<MenuAdapter.MenuViewHolder>() {
+class MenuAdapter @Inject constructor(private var categories: List<Category>) : RecyclerView.Adapter<MenuAdapter.MenuViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MenuViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.menu_item, parent, false)

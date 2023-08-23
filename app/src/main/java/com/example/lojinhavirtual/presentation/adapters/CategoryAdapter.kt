@@ -9,8 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.lojinhavirtual.R
 import com.example.lojinhavirtual.domain.Category
 import com.example.lojinhavirtual.domain.Product
+import javax.inject.Inject
 
-class CategoryAdapter(
+class CategoryAdapter @Inject constructor(
     private var categories: List<Category>,
     private val onItemClickListener: (Product) -> Unit
     ) : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {

@@ -1,6 +1,8 @@
 package com.example.lojinhavirtual.domain
 
-class GetCategoryUseCase (private val repository: ProductRepository) {
+import javax.inject.Inject
+
+class GetCategoryUseCase @Inject constructor(private val repository: ProductRepository) {
     suspend fun execute(): List<Category> {
         return repository.getCategories()
     }

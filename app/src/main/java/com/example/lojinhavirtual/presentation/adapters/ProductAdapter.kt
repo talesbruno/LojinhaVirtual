@@ -7,8 +7,9 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lojinhavirtual.R
 import com.example.lojinhavirtual.domain.Product
+import javax.inject.Inject
 
-class ProductAdapter(
+class ProductAdapter @Inject constructor(
     private val products: List<Product>,
     private val onItemClickListener: ((Product) -> Unit)? = null
 ) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {

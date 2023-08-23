@@ -7,9 +7,11 @@ import com.example.lojinhavirtual.domain.Product
 import com.example.lojinhavirtual.domain.ProductRepository
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import dagger.hilt.android.qualifiers.ApplicationContext
 import java.util.Scanner
+import javax.inject.Inject
 
-class ProductRepositoryImpl (private val context: Context) : ProductRepository {
+class ProductRepositoryImpl @Inject constructor(private val context: Context) : ProductRepository {
     override suspend fun getCategories(): List<Category> {
         val inputStream = context.resources.openRawResource(R.raw.fakedata)
         val jsonString = Scanner(inputStream).useDelimiter("\\A").next()
