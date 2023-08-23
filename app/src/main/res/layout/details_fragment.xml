@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ProductActivity">
+    android:layout_height="match_parent">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/product_toolbar"
@@ -17,7 +14,7 @@
 
     <ImageView
         android:background="@drawable/bg_btn"
-        android:id="@+id/product_img"
+        android:id="@+id/detail_product_img"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="15dp"
@@ -26,46 +23,46 @@
         app:layout_constraintTop_toBottomOf="@+id/product_toolbar" />
 
     <TextView
-        android:id="@+id/product_txt_off"
+        android:id="@+id/detail_txt_desc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_btn"
         android:backgroundTint="@color/black"
         android:padding="4dp"
         android:textColor="@color/white"
-        app:layout_constraintStart_toStartOf="@+id/product_img"
-        app:layout_constraintTop_toTopOf="@+id/product_img"
+        app:layout_constraintStart_toStartOf="@+id/detail_product_img"
+        app:layout_constraintTop_toTopOf="@+id/detail_product_img"
         tools:text="@string/off" />
 
     <TextView
         android:textSize="24sp"
-        android:id="@+id/product_txt_title"
+        android:id="@+id/detail_txt_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_marginTop="15dp"
         android:textColor="@color/pink"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/product_img"
+        app:layout_constraintTop_toBottomOf="@+id/detail_product_img"
         tools:text="produto x" />
 
     <TextView
-        android:id="@+id/product_txt_description"
+        android:id="@+id/detail_txt_description"
         android:textSize="14sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
         android:textColor="@color/pink"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/product_txt_title"
+        app:layout_constraintTop_toBottomOf="@+id/detail_txt_title"
         tools:text="produto x dadad dadad dadad dadad dadadadad dadad " />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout2"
+        android:id="@+id/detail_constraing_2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout4"
+        app:layout_constraintBottom_toTopOf="@+id/detail_constraint_3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
@@ -86,36 +83,37 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:text="0/500"
+            tools:text="0/500"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/product_txt"
+            android:id="@+id/detail_input_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/txt_fixed"
-            app:layout_below="@id/character_counter">
+            android:layout_below="@id/character_counter">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/search_product_txt"
+                android:id="@+id/detail_txt_input"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="@drawable/bg_btn" />
+                android:layout_height="45dp"
+                android:background="@drawable/bg_btn"
+                tools:ignore="SpeakableTextPresentCheck" />
         </com.google.android.material.textfield.TextInputLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:padding="15dp"
-        android:id="@+id/constraintLayout4"
+        android:id="@+id/detail_constraint_3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_btn"
         app:layout_constraintBottom_toBottomOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout3"
+            android:id="@+id/detail_constraint_4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_btn"
@@ -124,30 +122,32 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageButton
-                android:id="@+id/imageButton"
+                android:id="@+id/detail_btn_n"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:background="@android:color/transparent"
+                android:contentDescription="botao"
                 android:padding="12dp"
                 android:src="@drawable/baseline_remove_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:tint="@color/pink" />
+                app:tint="@color/pink"
+                tools:ignore="DuplicateSpeakableTextCheck" />
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/detail_qnt"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="1"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/imageButton2"
-                app:layout_constraintStart_toEndOf="@+id/imageButton"
+                app:layout_constraintEnd_toStartOf="@+id/detail_btn_m"
+                app:layout_constraintStart_toEndOf="@+id/detail_btn_n"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
-                android:id="@+id/imageButton2"
+                android:id="@+id/detail_btn_m"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:background="@android:color/transparent"
@@ -155,12 +155,14 @@
                 android:src="@drawable/baseline_add_24"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:tint="@color/pink" />
+                app:tint="@color/pink"
+                android:contentDescription="botao" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/detail_add_cart"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="47dp"
@@ -168,7 +170,7 @@
             android:backgroundTint="@color/pink"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/constraintLayout3"
+            app:layout_constraintStart_toEndOf="@+id/detail_constraint_4"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
@@ -182,6 +184,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:id="@+id/detail_amount_cart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="12dp"

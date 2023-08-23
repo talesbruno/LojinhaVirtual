@@ -12,7 +12,7 @@
         android:name="com.example.lojinhavirtual.presentation.fragments.HomeFragment"
         android:label="HomeFragment" >
         <action
-            android:id="@+id/action_homeFragment_to_detailsFragment"
+            android:id="@+id/go_to_detailsFragment"
             app:destination="@id/detailsFragment" />
     </fragment>
 
@@ -20,5 +20,9 @@
         tools:layout="@layout/details_fragment"
         android:id="@+id/detailsFragment"
         android:name="com.example.lojinhavirtual.presentation.fragments.DetailsFragment"
-        android:label="DetailsFragment" />
+        android:label="DetailsFragment" >
+        <argument
+            android:name="model"
+            app:argType="com.example.lojinhavirtual.domain.Product" />
+    </fragment>
 </navigation>

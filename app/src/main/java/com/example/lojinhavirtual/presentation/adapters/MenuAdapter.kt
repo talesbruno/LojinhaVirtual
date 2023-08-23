@@ -1,11 +1,11 @@
-package com.example.lojinhavirtual
+package com.example.lojinhavirtual.presentation.adapters
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.lojinhavirtual.R
 import com.example.lojinhavirtual.domain.Category
 
 class MenuAdapter(private var categories: List<Category>) : RecyclerView.Adapter<MenuAdapter.MenuViewHolder>() {

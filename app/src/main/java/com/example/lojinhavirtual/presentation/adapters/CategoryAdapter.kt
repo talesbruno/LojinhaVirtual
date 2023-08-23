@@ -1,4 +1,4 @@
-package com.example.lojinhavirtual
+package com.example.lojinhavirtual.presentation.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,9 +6,14 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.lojinhavirtual.R
 import com.example.lojinhavirtual.domain.Category
+import com.example.lojinhavirtual.domain.Product
 
-class CategoryAdapter(private var categories: List<Category>) : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
+class CategoryAdapter(
+    private var categories: List<Category>,
+    private val onItemClickListener: (Product) -> Unit
+    ) : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.category_item, parent, false)
@@ -36,7 +41,7 @@ class CategoryAdapter(private var categories: List<Category>) : RecyclerView.Ada
 
             val rvCategory: RecyclerView = itemView.findViewById(R.id.rv_category)
             rvCategory.layoutManager = LinearLayoutManager(itemView.context, RecyclerView.HORIZONTAL, false)
-            rvCategory.adapter = ProductAdapter(category.products)
+            rvCategory.adapter = ProductAdapter(category.products, onItemClickListener)
         }
     }
 }

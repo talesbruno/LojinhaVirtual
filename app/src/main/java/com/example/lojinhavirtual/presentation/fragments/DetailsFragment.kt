@@ -5,12 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.navArgs
 import com.example.lojinhavirtual.databinding.DetailsFragmentBinding
 import com.example.lojinhavirtual.databinding.HomeFragmentBinding
 
 class DetailsFragment : Fragment() {
     private var _binding: DetailsFragmentBinding? = null
     private val binding get() = _binding!!
+    private val args by navArgs<DetailsFragmentArgs>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -23,6 +25,8 @@ class DetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
     }
     override fun onDestroyView() {
         super.onDestroyView()
