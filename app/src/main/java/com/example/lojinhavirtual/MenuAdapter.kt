@@ -8,10 +8,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lojinhavirtual.domain.Category
 
-class MenuAdapter(private val categories: List<Category>) : RecyclerView.Adapter<MenuAdapter.MenuViewHolder>() {
+class MenuAdapter(private var categories: List<Category>) : RecyclerView.Adapter<MenuAdapter.MenuViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MenuViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.category_item, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.menu_item, parent, false)
         return MenuViewHolder(view)
     }
 
@@ -24,14 +24,15 @@ class MenuAdapter(private val categories: List<Category>) : RecyclerView.Adapter
         holder.bind(category)
     }
 
+    fun updateMenu(newCategories: List<Category>) {
+        categories = newCategories
+        notifyDataSetChanged()
+    }
+
     inner class MenuViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(category: Category){
             val textTitle: TextView = itemView.findViewById(R.id.txt_title)
             textTitle.text = category.name
-
-            val rvCategory: RecyclerView = itemView.findViewById(R.id.rv_category)
-            rvCategory.layoutManager = LinearLayoutManager(itemView.context, RecyclerView.HORIZONTAL, false)
-            rvCategory.adapter = ProductAdapter(category.products)
         }
     }
 }

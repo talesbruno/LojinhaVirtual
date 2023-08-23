@@ -9,9 +9,5 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-//        val adapter = CategoryAdapter()
-        val rv: RecyclerView = findViewById(R.id.rv_main)
-        rv.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
-//        rv.adapter = adapter
     }
 }

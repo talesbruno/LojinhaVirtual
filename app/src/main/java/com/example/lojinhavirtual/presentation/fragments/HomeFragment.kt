@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lojinhavirtual.CategoryAdapter
+import com.example.lojinhavirtual.MenuAdapter
 import com.example.lojinhavirtual.ProductAdapter
 import com.example.lojinhavirtual.R
 import com.example.lojinhavirtual.databinding.HomeFragmentBinding
@@ -31,20 +32,19 @@ class HomeFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Observar categorias
-        viewModel.categoriasLiveData.observe(viewLifecycleOwner){
-            val categoryAdapter = CategoryAdapter(it)
-            val categoriaRecyclerView: RecyclerView = view.findViewById(R.id.rv_menu)
-            categoriaRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-            categoriaRecyclerView.adapter = categoryAdapter
-        }
+        val categoryAdapter = CategoryAdapter(emptyList())
+        val categoryRecyclerView: RecyclerView = view.findViewById(R.id.rv_main)
+        categoryRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        categoryRecyclerView.adapter = categoryAdapter
 
-        // Observar produtos por categoria
-        viewModel.produtosPorCategoriaLiveData.observe(viewLifecycleOwner) {
-            val produtosPorCategoriaAdapter = ProductAdapter(it)
-            val produtosPorCategoriaRecyclerView: RecyclerView = view.findViewById(R.id.rv_main)
-            produtosPorCategoriaRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-            produtosPorCategoriaRecyclerView.adapter = produtosPorCategoriaAdapter
+        val menuAdapter = MenuAdapter(emptyList())
+        val menuRecyclerView: RecyclerView = view.findViewById(R.id.rv_menu)
+        menuRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        menuRecyclerView.adapter = menuAdapter
+
+        viewModel.categoriasLiveData.observe(viewLifecycleOwner){
+            categoryAdapter.updateCategories(it)
+            menuAdapter.updateMenu(it)
         }
     }
 
