@@ -15,7 +15,8 @@
           "preco": 29.99,
           "desconto": 10
         }
-      ]
+      ],
+      "icon": "R.drawable.cama"
     },
     {
       "nome": "Comedouros",
@@ -26,7 +27,8 @@
           "preco": 29.99,
           "desconto": ""
         }
-      ]
+      ],
+      "icon": "R.drawable.comedouros"
     },
     {
       "nome": "Casinha",
@@ -43,7 +45,8 @@
           "preco": 14.99,
           "desconto": 15
         }
-      ]
+      ],
+      "icon": "R.drawable.casinha"
     },
     {
       "nome": "Brinquedos",
@@ -54,7 +57,8 @@
           "preco": 49.99,
           "desconto": 10
         }
-      ]
+      ],
+      "icon": "R.drawable.brinquedos"
     }
   ]
 }
