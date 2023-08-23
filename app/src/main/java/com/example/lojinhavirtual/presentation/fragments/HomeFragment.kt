@@ -14,16 +14,24 @@ import com.example.lojinhavirtual.presentation.adapters.MenuAdapter
 import com.example.lojinhavirtual.R
 import com.example.lojinhavirtual.databinding.HomeFragmentBinding
 import com.example.lojinhavirtual.domain.Category
+import com.example.lojinhavirtual.domain.OnProductClickListener
+import com.example.lojinhavirtual.domain.Product
 import com.example.lojinhavirtual.presentation.ProductViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
+
     private val viewModel: ProductViewModel by viewModels()
     private var _binding: HomeFragmentBinding? = null
     private val binding get() = _binding!!
-    private lateinit var categoryAdapter: CategoryAdapter
-    private val categories = mutableListOf<Category>()
+
+    @Inject
+    lateinit var categoryAdapter: CategoryAdapter
+
+    @Inject
+    lateinit var menuAdapter: MenuAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,25 +45,26 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        categoryAdapter = CategoryAdapter(categories) { product ->
-            val directions = HomeFragmentDirections.goToDetailsFragment(product)
-            findNavController().navigate(directions)
-        }
-        val categoryRecyclerView: RecyclerView = view.findViewById(R.id.rv_main)
+        val categoryRecyclerView: RecyclerView = binding.rvMain
         categoryRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         categoryRecyclerView.adapter = categoryAdapter
 
-        val menuAdapter = MenuAdapter(emptyList())
-        val menuRecyclerView: RecyclerView = view.findViewById(R.id.rv_menu)
+        val menuRecyclerView: RecyclerView = binding.rvMenu
         menuRecyclerView.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         menuRecyclerView.adapter = menuAdapter
 
-        viewModel.categoriasLiveData.observe(viewLifecycleOwner) {
-            categoryAdapter.updateCategories(it)
-            menuAdapter.updateMenu(it)
+        viewModel.categoriasLiveData.observe(viewLifecycleOwner) { categories ->
+            categoryAdapter.updateCategories(categories)
+            menuAdapter.updateMenu(categories)
         }
 
+        categoryAdapter.onProductClickListener = object : OnProductClickListener {
+            override fun onProductClick(product: Product) {
+                val directions = HomeFragmentDirections.goToDetailsFragment(product)
+                findNavController().navigate(directions)
+            }
+        }
     }
 
     override fun onDestroyView() {

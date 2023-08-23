@@ -6,12 +6,13 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lojinhavirtual.R
+import com.example.lojinhavirtual.domain.OnProductClickListener
 import com.example.lojinhavirtual.domain.Product
 import javax.inject.Inject
 
 class ProductAdapter @Inject constructor(
     private val products: List<Product>,
-    private val onItemClickListener: ((Product) -> Unit)? = null
+    private val onItemClickListener: OnProductClickListener? = null
 ) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
@@ -32,7 +33,7 @@ class ProductAdapter @Inject constructor(
         fun bind(product: Product) {
             val imageCover: ImageView = itemView.findViewById(R.id.img_cover)
             imageCover.setOnClickListener {
-                onItemClickListener?.invoke(product)
+                onItemClickListener?.onProductClick(product)
             }
             imageCover.setImageResource(product.coverUrl)
         }
