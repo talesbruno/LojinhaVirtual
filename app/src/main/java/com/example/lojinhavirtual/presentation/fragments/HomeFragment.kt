@@ -60,10 +60,13 @@ class HomeFragment : Fragment(), OnProductClickListener {
         }
 
         viewModel.fakeCart.observe(viewLifecycleOwner) {
-            // Atualize o seu adapter com a nova lista de produtos no carrinho
-
+            if (it > 0){
+                binding.cartComponent.visibility = View.VISIBLE
+                binding.cartTotal.text = "R$ $it"
+            }else{
+                binding.cartComponent.visibility = View.GONE
+            }
         }
-
     }
 
     override fun onDestroyView() {
