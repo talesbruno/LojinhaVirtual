@@ -38,22 +38,32 @@ class ProductAdapter(
             val imageCover: ImageView = itemView.findViewById(R.id.img_cover)
             val title: TextView = itemView.findViewById(R.id.product_name)
             val price: TextView = itemView.findViewById(R.id.tv_old_price)
+            val newPrice: TextView = itemView.findViewById(R.id.tv_current_price)
+            val de: TextView = itemView.findViewById(R.id.textView2)
 
-            if (product.desc.toString().isNotBlank()) {
+            if (product.desc != null) {
+                val discountedPrice = product.price * (1 - (product.desc / 100))
                 desc.text = "${product.desc}% OFF"
+                price.text = "R$ ${product.price}"
+                newPrice.text = "R$ ${String.format("%.2f", discountedPrice)}"
                 desc.visibility = View.VISIBLE
+                price.visibility = View.VISIBLE
+                de.visibility = View.VISIBLE
             } else {
+                newPrice.text = "R$ ${product.price}"
                 desc.visibility = View.GONE
+                price.visibility = View.GONE
+                de.visibility = View.GONE
             }
             val resources = itemView.context.resources
-            val iconResourceId = resources.getIdentifier(product.coverUrl, "drawable", itemView.context.packageName)
+            val iconResourceId =
+                resources.getIdentifier(product.coverUrl, "drawable", itemView.context.packageName)
 
             if (iconResourceId != 0) {
                 imageCover.setImageResource(iconResourceId)
             } else {
             }
             title.text = product.name
-            price.text = product.price.toString()
 
             imageCover.setOnClickListener {
                 onProductClickListener.onProductClick(product)
