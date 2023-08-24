@@ -8,9 +8,13 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lojinhavirtual.R
 import com.example.lojinhavirtual.domain.Category
+import com.example.lojinhavirtual.domain.OnProductClickListener
 import javax.inject.Inject
 
-class MenuAdapter (private var categories: List<Category>) : RecyclerView.Adapter<MenuAdapter.MenuViewHolder>() {
+class MenuAdapter (
+    private var categories: List<Category>,
+    private val onCategoryClickListener: OnProductClickListener
+    ) : RecyclerView.Adapter<MenuAdapter.MenuViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MenuViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.menu_item, parent, false)
@@ -43,6 +47,9 @@ class MenuAdapter (private var categories: List<Category>) : RecyclerView.Adapte
                 icon.setImageResource(iconResourceId)
             } else {
 
+            }
+            itemView.setOnClickListener {
+                onCategoryClickListener.onCategoryClick(category)
             }
         }
     }

@@ -12,4 +12,8 @@ class GetCategoryUseCase @Inject constructor(private val repository: ProductRepo
         val allProducts = allCategories.flatMap { it.products }
         return allProducts.filter { it.name.contains(query, ignoreCase = true) }
     }
+
+    suspend fun filterProductsByCategory(category: Category): List<Product> {
+        return category.products
+    }
 }

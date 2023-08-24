@@ -52,7 +52,7 @@ class HomeFragment : Fragment(), OnProductClickListener {
 
     private fun setupRecyclerViews() {
         categoryAdapter = CategoryAdapter(emptyList(), this)
-        menuAdapter = MenuAdapter(emptyList())
+        menuAdapter = MenuAdapter(emptyList(),this)
 
         binding.rvMain.apply {
             layoutManager = LinearLayoutManager(requireContext())
@@ -108,6 +108,10 @@ class HomeFragment : Fragment(), OnProductClickListener {
     override fun onProductClick(product: Product) {
         val directions = HomeFragmentDirections.goToDetailsFragment(product)
         findNavController().navigate(directions)
+    }
+
+    override fun onCategoryClick(category: Category) {
+        viewModel.filterProductsByCategory(category)
     }
 }
 

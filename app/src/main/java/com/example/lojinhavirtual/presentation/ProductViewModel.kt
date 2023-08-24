@@ -54,7 +54,12 @@ class ProductViewModel @Inject constructor(
             _searchResultsLiveData.postValue(searchResults)
         }
     }
-
+    fun filterProductsByCategory(category: Category) {
+        viewModelScope.launch {
+            val filteredProducts = getCategoryUseCase.filterProductsByCategory(category)
+            _searchResultsLiveData.postValue(filteredProducts)
+        }
+    }
     fun loadAllCategories() {
         carregarCategorias()
     }
