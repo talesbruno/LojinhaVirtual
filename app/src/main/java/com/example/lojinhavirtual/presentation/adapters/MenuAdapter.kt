@@ -9,7 +9,7 @@ import com.example.lojinhavirtual.R
 import com.example.lojinhavirtual.domain.Category
 import javax.inject.Inject
 
-class MenuAdapter @Inject constructor(private var categories: List<Category>) : RecyclerView.Adapter<MenuAdapter.MenuViewHolder>() {
+class MenuAdapter (private var categories: List<Category>) : RecyclerView.Adapter<MenuAdapter.MenuViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MenuViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.menu_item, parent, false)
@@ -32,7 +32,7 @@ class MenuAdapter @Inject constructor(private var categories: List<Category>) : 
 
     inner class MenuViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(category: Category){
-            val textTitle: TextView = itemView.findViewById(R.id.txt_title)
+            val textTitle: TextView = itemView.findViewById(R.id.nomeCategoriaTextView)
             textTitle.text = category.name
         }
     }

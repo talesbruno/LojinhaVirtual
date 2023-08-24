@@ -29,6 +29,7 @@
 
         <TextView
             android:id="@+id/product_txt_off"
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_btn"
@@ -81,7 +82,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="8dp"
-            android:text="R$ 100,00"
+            tools:text="100,00"
             android:textColor="#FF0000"
             android:textSize="14sp"
             app:layout_constraintBottom_toTopOf="@+id/tv_current_price"

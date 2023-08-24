@@ -12,9 +12,9 @@ import com.example.lojinhavirtual.domain.OnProductClickListener
 import com.example.lojinhavirtual.domain.Product
 import javax.inject.Inject
 
-class CategoryAdapter @Inject constructor(
+class CategoryAdapter(
     private var categories: List<Category>,
-    var onProductClickListener: OnProductClickListener
+    private val onProductClickListener: OnProductClickListener
     ) : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
@@ -38,16 +38,12 @@ class CategoryAdapter @Inject constructor(
 
     inner class CategoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(category: Category){
-            val textTitle: TextView = itemView.findViewById(R.id.txt_title)
+            val textTitle: TextView = itemView.findViewById(R.id.txt_cat_title)
             textTitle.text = category.name
 
             val rvCategory: RecyclerView = itemView.findViewById(R.id.rv_category)
             rvCategory.layoutManager = LinearLayoutManager(itemView.context, RecyclerView.HORIZONTAL, false)
-            rvCategory.adapter = ProductAdapter(category.products, object : OnProductClickListener {
-                override fun onProductClick(product: Product) {
-                    onProductClickListener.onProductClick(product)
-                }
-            })
+            rvCategory.adapter = ProductAdapter(category.products, onProductClickListener)
         }
     }
 }

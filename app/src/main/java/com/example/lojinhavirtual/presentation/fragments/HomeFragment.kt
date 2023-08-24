@@ -21,16 +21,13 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), OnProductClickListener {
 
     private val viewModel: ProductViewModel by viewModels()
     private var _binding: HomeFragmentBinding? = null
     private val binding get() = _binding!!
 
-    @Inject
     lateinit var categoryAdapter: CategoryAdapter
-
-    @Inject
     lateinit var menuAdapter: MenuAdapter
 
     override fun onCreateView(
@@ -44,6 +41,9 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        categoryAdapter = CategoryAdapter(emptyList(),this)
+        menuAdapter = MenuAdapter(emptyList())
 
         val categoryRecyclerView: RecyclerView = binding.rvMain
         categoryRecyclerView.layoutManager = LinearLayoutManager(requireContext())
@@ -59,16 +59,15 @@ class HomeFragment : Fragment() {
             menuAdapter.updateMenu(categories)
         }
 
-        categoryAdapter.onProductClickListener = object : OnProductClickListener {
-            override fun onProductClick(product: Product) {
-                val directions = HomeFragmentDirections.goToDetailsFragment(product)
-                findNavController().navigate(directions)
-            }
-        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onProductClick(product: Product) {
+        val directions = HomeFragmentDirections.goToDetailsFragment(product)
+        findNavController().navigate(directions)
     }
 }
