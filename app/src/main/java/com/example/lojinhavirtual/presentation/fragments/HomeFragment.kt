@@ -27,8 +27,8 @@ class HomeFragment : Fragment(), OnProductClickListener {
     private var _binding: HomeFragmentBinding? = null
     private val binding get() = _binding!!
 
-    lateinit var categoryAdapter: CategoryAdapter
-    lateinit var menuAdapter: MenuAdapter
+    private lateinit var categoryAdapter: CategoryAdapter
+    private lateinit var menuAdapter: MenuAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,32 +41,8 @@ class HomeFragment : Fragment(), OnProductClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        categoryAdapter = CategoryAdapter(emptyList(),this)
-        menuAdapter = MenuAdapter(emptyList())
-
-        val categoryRecyclerView: RecyclerView = binding.rvMain
-        categoryRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-        categoryRecyclerView.adapter = categoryAdapter
-
-        val menuRecyclerView: RecyclerView = binding.rvMenu
-        menuRecyclerView.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        menuRecyclerView.adapter = menuAdapter
-
-        viewModel.categoriasLiveData.observe(viewLifecycleOwner) { categories ->
-            categoryAdapter.updateCategories(categories)
-            menuAdapter.updateMenu(categories)
-        }
-
-        viewModel.fakeCart.observe(viewLifecycleOwner) {
-            if (it > 0){
-                binding.cartComponent.visibility = View.VISIBLE
-                binding.cartTotal.text = "R$ $it"
-            }else{
-                binding.cartComponent.visibility = View.GONE
-            }
-        }
+        setupRecyclerViews()
+        observeViewModel()
     }
 
     override fun onDestroyView() {
@@ -74,8 +50,40 @@ class HomeFragment : Fragment(), OnProductClickListener {
         _binding = null
     }
 
+    private fun setupRecyclerViews() {
+        categoryAdapter = CategoryAdapter(emptyList(), this)
+        menuAdapter = MenuAdapter(emptyList())
+
+        binding.rvMain.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = categoryAdapter
+        }
+
+        binding.rvMenu.apply {
+            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            adapter = menuAdapter
+        }
+    }
+
+    private fun observeViewModel() {
+        viewModel.categoriasLiveData.observe(viewLifecycleOwner) { categories ->
+            categoryAdapter.updateCategories(categories)
+            menuAdapter.updateMenu(categories)
+        }
+
+        viewModel.fakeCart.observe(viewLifecycleOwner) { cartTotal ->
+            if (cartTotal > 0) {
+                binding.cartComponent.visibility = View.VISIBLE
+                binding.cartTotal.text = "R$ $cartTotal"
+            } else {
+                binding.cartComponent.visibility = View.GONE
+            }
+        }
+    }
+
     override fun onProductClick(product: Product) {
         val directions = HomeFragmentDirections.goToDetailsFragment(product)
         findNavController().navigate(directions)
     }
 }
+
