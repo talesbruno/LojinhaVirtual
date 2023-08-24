@@ -44,13 +44,14 @@ class ProductAdapter(
             val de: TextView = itemView.findViewById(R.id.textView2)
 
             if (product.desc != null) {
-                val discountedPrice = product.price * (1 - (product.desc / 100))
+                desc.visibility = View.VISIBLE //valor verde
+                price.visibility = View.VISIBLE //valor antigo
+                de.visibility = View.VISIBLE
+                val discountPercentage = product.desc.toDouble()
+                val discount = product.price * (discountPercentage / 100)
                 desc.text = "${product.desc}% OFF"
                 price.text = "R$ ${product.price}"
-                newPrice.text = "R$ ${String.format("%.2f", discountedPrice)}"
-                desc.visibility = View.VISIBLE
-                price.visibility = View.VISIBLE
-                de.visibility = View.VISIBLE
+                newPrice.text = "R$ ${String.format("%.2f", product.price - discount)}"
             } else {
                 newPrice.text = "R$ ${product.price}"
                 desc.visibility = View.GONE

@@ -59,6 +59,11 @@ class HomeFragment : Fragment(), OnProductClickListener {
             menuAdapter.updateMenu(categories)
         }
 
+        viewModel.fakeCart.observe(viewLifecycleOwner) {
+            // Atualize o seu adapter com a nova lista de produtos no carrinho
+
+        }
+
     }
 
     override fun onDestroyView() {

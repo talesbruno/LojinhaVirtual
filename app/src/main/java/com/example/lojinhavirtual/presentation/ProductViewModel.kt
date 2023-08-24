@@ -24,6 +24,9 @@ class ProductViewModel @Inject constructor(
     private val _produtosPorCategoriaLiveData = MutableLiveData<List<Product>>()
     val produtosPorCategoriaLiveData: LiveData<List<Product>> = _produtosPorCategoriaLiveData
 
+    private val _fakeCart = MutableLiveData<Double>()
+    val fakeCart: LiveData<Double> = _fakeCart
+
     init {
         carregarCategorias()
     }
@@ -40,5 +43,10 @@ class ProductViewModel @Inject constructor(
             val produtosPorCategoria = getProductForCategoryUseCase.execute(categoria)
             _produtosPorCategoriaLiveData.postValue(produtosPorCategoria)
         }
+    }
+
+    fun addToCart(amount: Double) {
+        val currentTotal = _fakeCart.value ?: 0.0 // Valor atual do LiveData ou 0 se for nulo
+        _fakeCart.value = currentTotal + amount // Adiciona o novo valor ao total
     }
 }
