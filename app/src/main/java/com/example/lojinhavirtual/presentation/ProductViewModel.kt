@@ -27,6 +27,9 @@ class ProductViewModel @Inject constructor(
     private val _fakeCart = MutableLiveData<Double>()
     val fakeCart: LiveData<Double> = _fakeCart
 
+    private val _searchResultsLiveData = MutableLiveData<List<Product>>()
+    val searchResultsLiveData: LiveData<List<Product>> = _searchResultsLiveData
+
     init {
         carregarCategorias()
     }
@@ -45,8 +48,20 @@ class ProductViewModel @Inject constructor(
         }
     }
 
+    fun searchProductsByName(query: String) {
+        viewModelScope.launch {
+            val searchResults = getCategoryUseCase.searchProductsByName(query)
+            _searchResultsLiveData.postValue(searchResults)
+        }
+    }
+
+    fun loadAllCategories() {
+        carregarCategorias()
+    }
+
     fun addToCart(amount: Double) {
-        val currentTotal = _fakeCart.value ?: 0.0 // Valor atual do LiveData ou 0 se for nulo
-        _fakeCart.value = currentTotal + amount // Adiciona o novo valor ao total
+        val currentTotal = _fakeCart.value ?: 0.0
+        val newTotal = currentTotal + amount
+        _fakeCart.value = newTotal
     }
 }

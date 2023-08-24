@@ -15,7 +15,9 @@ import javax.inject.Inject
 class CategoryAdapter(
     private var categories: List<Category>,
     private val onProductClickListener: OnProductClickListener
-    ) : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
+) : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
+
+    private var filteredCategories: List<Category> = categories
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.category_item, parent, false)
@@ -23,16 +25,30 @@ class CategoryAdapter(
     }
 
     override fun getItemCount(): Int {
-        return categories.size
+        return filteredCategories.size
     }
 
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
-        val category = categories[position]
+        val category = filteredCategories[position]
         holder.bind(category)
     }
 
     fun updateCategories(newCategories: List<Category>) {
         categories = newCategories
+        applyFilter("") // Reapply filter to the new list
+        notifyDataSetChanged()
+    }
+
+    fun applyFilter(query: String) {
+        filteredCategories = if (query.isBlank()) {
+            categories // Show all categories if the query is blank
+        } else {
+            categories.filter { category ->
+                category.products.any { product ->
+                    product.name.contains(query, ignoreCase = true)
+                }
+            }
+        }
         notifyDataSetChanged()
     }
 

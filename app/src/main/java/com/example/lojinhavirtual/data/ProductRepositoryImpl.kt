@@ -14,18 +14,6 @@ import java.util.Scanner
 import javax.inject.Inject
 
 class ProductRepositoryImpl @Inject constructor(private val context: Context) : ProductRepository {
-    //    override suspend fun getCategories(): List<Category> {
-//        val inputStream = context.resources.openRawResource(R.raw.fakedata)
-//        val jsonString = Scanner(inputStream).useDelimiter("\\A").next()
-//        val gson = Gson()
-//
-//        // Ajuste para o objeto raiz
-//        val jsonObject = JSONObject(jsonString)
-//        val categoriasArray = jsonObject.getJSONArray("categorias")
-//
-//        val categoriasType = object : TypeToken<List<Category>>() {}.type
-//        return gson.fromJson(categoriasArray.toString(), categoriasType)
-//    }
     override suspend fun getCategories(): List<Category> {
         val jsonString = readJSONFromAssets(context)
         return toCategories(jsonString)
@@ -55,17 +43,6 @@ class ProductRepositoryImpl @Inject constructor(private val context: Context) : 
         return produtosPorCategoria
     }
 
-    //    override suspend fun getCategories(): List<Category> = withContext(Dispatchers.IO) {
-//        val resources: Resources = context.resources
-//        val inputStream = resources.openRawResource(R.raw.fakedata)
-//        val reader = BufferedReader(InputStreamReader(inputStream))
-//        val json = reader.readText()
-//
-//        val gson = Gson()
-//        val categories: List<Category> = gson.fromJson(json, Array<Category>::class.java).toList()
-//
-//        categories
-//    }
     private fun toCategories(jsonAsString: String): List<Category> {
         val categories = mutableListOf<Category>()
         val jsonRoot = JSONObject(jsonAsString)

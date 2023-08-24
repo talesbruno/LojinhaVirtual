@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.lojinhavirtual.databinding.DetailsFragmentBinding
 import com.example.lojinhavirtual.domain.Product
@@ -107,7 +108,7 @@ class DetailsFragment : Fragment() {
         binding.detailAddCart.setOnClickListener {
             val totalPrice = calculateTotalPrice(product, binding.detailQnt.text.toString().toInt())
             viewModel.addToCart(totalPrice)
+            findNavController().navigateUp()
         }
     }
-
 }
