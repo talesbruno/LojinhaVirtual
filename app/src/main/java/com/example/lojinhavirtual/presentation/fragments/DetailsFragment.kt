@@ -17,7 +17,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class DetailsFragment : Fragment() {
     private val viewModel: ProductViewModel by viewModels()
     private var _binding: DetailsFragmentBinding? = null
-    private var quantidade: Int = 1
     private val binding get() = _binding!!
     private val args by navArgs<DetailsFragmentArgs>()
 
@@ -30,48 +29,85 @@ class DetailsFragment : Fragment() {
         return binding.root
     }
 
-    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val resources = requireContext().resources
-        val coverResourceId =
-            resources.getIdentifier(args.model.coverUrl, "drawable", requireContext().packageName)
-        binding.detailProductImg.setImageResource(coverResourceId)
-
-        binding.detailTxtTitle.text = args.model.name
-        binding.detailTxtDescription.text = args.model.name
-        binding.detailQnt.text = quantidade.toString()
-        val originalPrice = args.model.price
-        val discountPercentage = args.model.desc
-        val discountedPrice: Double
-
-        if (args.model.desc != null) {
-            binding.detailTxtDesc.visibility = View.VISIBLE
-            binding.detailTxtDesc.text = "$discountPercentage% OFF"
-            discountedPrice = originalPrice * (discountPercentage!! / 100.0)
-            binding.detailAmountCart.text = "R$ ${String.format("%.2f", originalPrice - discountedPrice)}"
-        } else {
-            binding.detailTxtDesc.visibility = View.GONE
-            binding.detailAmountCart.text = "R$ $originalPrice"
-        }
-
-        binding.detailBtnN.setOnClickListener {
-            if (quantidade > 1){
-                quantidade--
-                binding.detailQnt.text = quantidade.toString()
-            }
-        }
-        binding.detailBtnM.setOnClickListener {
-            quantidade++
-            binding.detailQnt.text = quantidade.toString()
-        }
-
+        setupUI()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun setupUI() {
+        val product = args.model
+        binding.apply {
+            setupImageView(product.coverUrl)
+            setupTitleAndDescription(product)
+            setupQuantityButtons(product)
+            setupAddToCartButton(product)
+            setupCardDesc(product)
+        }
+    }
+
+    private fun setupImageView(coverUrl: String) {
+        val resources = requireContext().resources
+        val coverResourceId =
+            resources.getIdentifier(coverUrl, "drawable", requireContext().packageName)
+        binding.detailProductImg.setImageResource(coverResourceId)
+    }
+
+    private fun setupTitleAndDescription(product: Product) {
+        binding.detailTxtTitle.text = product.name
+        binding.detailTxtDescription.text = product.name
+    }
+
+    private fun setupCardDesc(product: Product) {
+        if (product.desc != null) {
+            binding.detailTxtDesc.visibility = View.VISIBLE
+            binding.detailTxtDesc.text = "${product.desc}% OFF"
+        }else{
+            binding.detailTxtDesc.visibility = View.GONE
+        }
+    }
+
+    private fun setupQuantityButtons(product: Product) {
+        var quantidade = 1
+
+        binding.detailQnt.text = quantidade.toString()
+
+        binding.detailBtnN.setOnClickListener {
+            if (quantidade > 1) {
+                quantidade--
+                binding.detailQnt.text = quantidade.toString()
+                updateTotalPrice(product, quantidade)
+            }
+        }
+
+        binding.detailBtnM.setOnClickListener {
+            quantidade++
+            binding.detailQnt.text = quantidade.toString()
+            updateTotalPrice(product, quantidade)
+        }
+    }
+
+    private fun updateTotalPrice(product: Product, quantity: Int) {
+        val totalPrice = calculateTotalPrice(product, quantity)
+        binding.detailAmountCart.text = "R$ %.2f".format(totalPrice)
+    }
+
+    private fun calculateTotalPrice(product: Product, quantity: Int): Double {
+        val originalPrice = product.price
+        val discountPercentage = product.desc ?: 0
+        val discountedPrice = originalPrice * (1 - (discountPercentage.toDouble() / 100))
+        return discountedPrice * quantity
+    }
+
+    private fun setupAddToCartButton(product: Product) {
+        binding.detailAddCart.setOnClickListener {
+            val totalPrice = calculateTotalPrice(product, binding.detailQnt.text.toString().toInt())
+            viewModel.addToCart(totalPrice)
+        }
     }
 
 }
