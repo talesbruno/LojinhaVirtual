@@ -28,6 +28,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/bg_btn"
         android:backgroundTint="@color/black"
+        android:visibility="gone"
         android:padding="4dp"
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="@+id/detail_product_img"
