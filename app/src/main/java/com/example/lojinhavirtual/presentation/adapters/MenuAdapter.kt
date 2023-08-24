@@ -3,6 +3,7 @@ package com.example.lojinhavirtual.presentation.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lojinhavirtual.R
@@ -33,7 +34,9 @@ class MenuAdapter (private var categories: List<Category>) : RecyclerView.Adapte
     inner class MenuViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(category: Category){
             val textTitle: TextView = itemView.findViewById(R.id.nomeCategoriaTextView)
+            val icon: ImageView = itemView.findViewById(R.id.categoriaImageView)
             textTitle.text = category.name
+            icon.setImageResource(category.icon)
         }
     }
 }

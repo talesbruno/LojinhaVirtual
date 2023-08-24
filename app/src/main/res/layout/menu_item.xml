@@ -22,5 +22,6 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="8dp"
         android:text="Nome da Categoria"
+        android:textColor="@color/pink"
         android:textSize="12sp" />
 </LinearLayout>
