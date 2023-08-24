@@ -9,6 +9,6 @@ data class Product(
     val id: Int,
     val name: String,
     val price: Double,
-    val desc: Int,
-    @DrawableRes val coverUrl: Int
+    val desc: Int?,
+    val coverUrl: String
 ) : Parcelable

@@ -36,7 +36,14 @@ class MenuAdapter (private var categories: List<Category>) : RecyclerView.Adapte
             val textTitle: TextView = itemView.findViewById(R.id.nomeCategoriaTextView)
             val icon: ImageView = itemView.findViewById(R.id.categoriaImageView)
             textTitle.text = category.name
-            icon.setImageResource(category.icon)
+            val resources = itemView.context.resources
+            val iconResourceId = resources.getIdentifier(category.icon, "drawable", itemView.context.packageName)
+
+            if (iconResourceId != 0) {
+                icon.setImageResource(iconResourceId)
+            } else {
+
+            }
         }
     }
 }

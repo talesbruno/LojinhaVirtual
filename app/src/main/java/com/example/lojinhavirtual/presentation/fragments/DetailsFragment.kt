@@ -29,7 +29,9 @@ class DetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.detailProductImg.setImageResource(args.model.coverUrl)
+        val resources = requireContext().resources
+        val coverResourceId = resources.getIdentifier(args.model.coverUrl, "drawable", requireContext().packageName)
+        binding.detailProductImg.setImageResource(coverResourceId)
         binding.detailTxtTitle.text = args.model.name
         binding.detailTxtDescription.text = args.model.name
         if (args.model.desc.toString().isNotBlank()) {

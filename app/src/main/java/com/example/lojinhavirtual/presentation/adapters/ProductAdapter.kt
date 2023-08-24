@@ -45,7 +45,13 @@ class ProductAdapter(
             } else {
                 desc.visibility = View.GONE
             }
-            imageCover.setImageResource(product.coverUrl)
+            val resources = itemView.context.resources
+            val iconResourceId = resources.getIdentifier(product.coverUrl, "drawable", itemView.context.packageName)
+
+            if (iconResourceId != 0) {
+                imageCover.setImageResource(iconResourceId)
+            } else {
+            }
             title.text = product.name
             price.text = product.price.toString()
 

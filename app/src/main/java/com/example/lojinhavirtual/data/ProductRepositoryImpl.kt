@@ -74,19 +74,20 @@ class ProductRepositoryImpl @Inject constructor(private val context: Context) : 
             val jsonCategory = jsonCategories.getJSONObject(i)
 
             val title = jsonCategory.getString("nome")
-            val icon = jsonCategory.getInt("icon")
+            val icon = jsonCategory.getString("icon")
             val jsonProducts = jsonCategory.getJSONArray("produtos")
 
             val products = mutableListOf<Product>()
             for (j in 0 until jsonProducts.length()) {
                 val jsonProduct = jsonProducts.getJSONObject(j)
                 val id = jsonProduct.getInt("id")
-                val img = jsonProduct.getInt("img")
+                val img = jsonProduct.getString("img")
                 val name = jsonProduct.getString("nome")
                 val price = jsonProduct.getDouble("preco")
-                val desc = jsonProduct.getInt("desconto")
+                val desc = jsonProduct.optString("desconto")
 
-                products.add(Product(id, name, price, desc, img))
+                val discount = if (desc.isEmpty()) null else desc.toIntOrNull()
+                products.add(Product(id, name, price, discount, img))
             }
             categories.add(Category(title, icon, products))
         }
