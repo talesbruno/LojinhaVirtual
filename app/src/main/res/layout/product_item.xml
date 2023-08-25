@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card_product"
-    android:layout_width="match_parent"
+    android:layout_width="193dp"
     android:layout_height="wrap_content"
     android:layout_marginStart="15dp"
     android:background="@drawable/bg_btn"
@@ -12,7 +12,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="280dp"
         android:layout_margin="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -26,7 +26,10 @@
             <ImageView
                 android:id="@+id/img_cover"
                 android:layout_width="match_parent"
+                tools:src="@drawable/ic_launcher_background"
+                android:scaleType="centerCrop"
                 android:layout_height="0dp"
+                android:layout_marginBottom="5dp"
                 app:layout_constraintBottom_toTopOf="@+id/product_name"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -74,18 +77,36 @@
                     <TextView
                         android:id="@+id/textView2"
                         android:textSize="12sp"
-                        tools:text="De"
+                        android:text="De"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
 
-                    <TextView
-                        android:id="@+id/tv_old_price"
-                        android:layout_marginStart="4dp"
-                        android:textSize="14sp"
-                        tools:text="R$ 80,00"
-                        android:textColor="#FF0000"
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp">
+
+                        <TextView
+                            android:id="@+id/tv_old_price"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#FF0000"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:text="R$ 80,00" />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="1dp"
+                            android:layout_gravity="top"
+                            android:background="#FF0000"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="@+id/tv_old_price"
+                            app:layout_constraintStart_toStartOf="@+id/tv_old_price"
+                            app:layout_constraintTop_toTopOf="@+id/tv_old_price" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
                 </LinearLayout>
 
                 <LinearLayout
@@ -96,7 +117,7 @@
                     <TextView
                         android:id="@+id/textView3"
                         android:textSize="12sp"
-                        tools:text="Por"
+                        android:text="Por"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
 
@@ -106,7 +127,7 @@
                         android:layout_weight="1"
                         android:textSize="14sp"
                         tools:text="R$ 70,00"
-                        android:textColor="#FF0000"
+                        android:textColor="@color/black"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
 
