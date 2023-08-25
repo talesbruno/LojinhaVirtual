@@ -8,17 +8,17 @@
           "nome": "Produto A",
           "preco": 19.99,
           "desconto": "",
-          "img": "R.drawable.cama2"
+          "img": "cama2"
         },
         {
           "id": 6,
           "nome": "Produto F",
           "preco": 29.99,
           "desconto": 10,
-          "img": "R.drawable.macaco"
+          "img": "macaco"
         }
       ],
-      "icon": "R.drawable.cama"
+      "icon": "cama"
     },
     {
       "nome": "Comedouros",
@@ -28,10 +28,10 @@
           "nome": "Produto B",
           "preco": 29.99,
           "desconto": "",
-          "img": "R.drawable.brinquedinho"
+          "img": "brinquedinho"
         }
       ],
-      "icon": "R.drawable.comedouros"
+      "icon": "comedouros"
     },
     {
       "nome": "Casinha",
@@ -41,17 +41,17 @@
           "nome": "Produto C",
           "preco": 9.99,
           "desconto": 10,
-          "img": "R.drawable.cama1"
+          "img": "cama1"
         },
         {
           "id": 5,
           "nome": "Produto E",
           "preco": 14.99,
           "desconto": 15,
-          "img": "R.drawable.brinquedinho"
+          "img": "cama2"
         }
       ],
-      "icon": "R.drawable.casinha"
+      "icon": "casinha"
     },
     {
       "nome": "Brinquedos",
@@ -61,10 +61,10 @@
           "nome": "Produto D",
           "preco": 49.99,
           "desconto": 10,
-          "img": "R.drawable.brinquedinho"
+          "img": "brinquedinho"
         }
       ],
-      "icon": "R.drawable.brinquedos"
+      "icon": "brinquedos"
     }
   ]
 }

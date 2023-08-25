@@ -37,16 +37,25 @@ class MenuAdapter (
 
     inner class MenuViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(category: Category){
+            val imageResourceMap = mapOf(
+                "cama" to R.drawable.cama,
+                "macaco" to R.drawable.macaco,
+                "comedouros" to R.drawable.comedouros,
+                "brinquedos" to R.drawable.brinquedos,
+                "casinha" to R.drawable.casinha,
+                "cama1" to R.drawable.cama1,
+                "cama2" to R.drawable.cama2,
+                "brinquedinho" to R.drawable.brinquedinho
+            )
             val textTitle: TextView = itemView.findViewById(R.id.nomeCategoriaTextView)
             val icon: ImageView = itemView.findViewById(R.id.categoriaImageView)
             textTitle.text = category.name
-            val resources = itemView.context.resources
-            val iconResourceId = resources.getIdentifier(category.icon, "drawable", itemView.context.packageName)
 
-            if (iconResourceId != 0) {
+            val iconResourceId = imageResourceMap[category.icon]
+            if (iconResourceId != null) {
                 icon.setImageResource(iconResourceId)
             } else {
-
+                // Handle the case when the icon is not found
             }
             itemView.setOnClickListener {
                 onCategoryClickListener.onCategoryClick(category)

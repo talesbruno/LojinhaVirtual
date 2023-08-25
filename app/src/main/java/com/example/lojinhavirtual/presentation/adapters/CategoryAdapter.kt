@@ -35,13 +35,13 @@ class CategoryAdapter(
 
     fun updateCategories(newCategories: List<Category>) {
         categories = newCategories
-        applyFilter("") // Reapply filter to the new list
+        applyFilter("")
         notifyDataSetChanged()
     }
 
     fun applyFilter(query: String) {
         filteredCategories = if (query.isBlank()) {
-            categories // Show all categories if the query is blank
+            categories
         } else {
             categories.filter { category ->
                 category.products.any { product ->

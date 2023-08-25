@@ -8,12 +8,12 @@
 
     <item
         android:id="@+id/menu_pedidos"
-        android:icon="@drawable/baseline_home_24"
+        android:icon="@drawable/baseline_edit_note_24"
         android:title="@string/pedidos"/>
 
     <item
         android:id="@+id/menu_mais"
-        android:icon="@drawable/baseline_home_24"
+        android:icon="@drawable/baseline_more_horiz_24"
         android:title="@string/mais"/>
 
 </menu>

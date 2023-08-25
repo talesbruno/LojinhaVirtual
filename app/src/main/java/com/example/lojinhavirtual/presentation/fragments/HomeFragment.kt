@@ -73,7 +73,7 @@ class HomeFragment : Fragment(), OnProductClickListener {
         }
 
         viewModel.searchResultsLiveData.observe(viewLifecycleOwner) { searchResults ->
-            categoryAdapter.applyFilter("") // Limpar o filtro das categorias
+            categoryAdapter.applyFilter("")
             categoryAdapter.updateCategories(createDummyCategories(searchResults))
         }
 
@@ -88,7 +88,6 @@ class HomeFragment : Fragment(), OnProductClickListener {
     }
 
     private fun createDummyCategories(products: List<Product>): List<Category> {
-        // Aqui, você cria uma categoria fictícia que contém apenas os produtos da pesquisa
         return listOf(Category("Resultado da Pesquisa", "", products))
     }
 
