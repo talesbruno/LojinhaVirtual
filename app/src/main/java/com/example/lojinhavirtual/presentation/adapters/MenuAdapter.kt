@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.lojinhavirtual.R
 import com.example.lojinhavirtual.domain.Category
 import com.example.lojinhavirtual.domain.OnProductClickListener
-import javax.inject.Inject
 
 class MenuAdapter (
     private var categories: List<Category>,
@@ -55,7 +54,7 @@ class MenuAdapter (
             if (iconResourceId != null) {
                 icon.setImageResource(iconResourceId)
             } else {
-                // Handle the case when the icon is not found
+
             }
             itemView.setOnClickListener {
                 onCategoryClickListener.onCategoryClick(category)

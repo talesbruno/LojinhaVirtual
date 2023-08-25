@@ -26,7 +26,8 @@
             <ImageView
                 android:id="@+id/img_cover"
                 android:layout_width="match_parent"
-                tools:src="@drawable/ic_launcher_background"
+                tools:src="@drawable/cama1"
+                app:layout_constraintDimensionRatio="1:1"
                 android:scaleType="centerCrop"
                 android:layout_height="0dp"
                 android:layout_marginBottom="5dp"
@@ -37,12 +38,13 @@
 
             <TextView
                 android:id="@+id/product_txt_off"
+                android:padding="5dp"
+                android:visibility="gone"
                 android:background="@color/green"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 android:textColor="@color/white"
-                android:visibility="gone"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="10% OFF" />
 

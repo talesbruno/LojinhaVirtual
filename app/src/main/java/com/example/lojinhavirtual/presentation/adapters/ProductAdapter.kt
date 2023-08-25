@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.lojinhavirtual.R
 import com.example.lojinhavirtual.domain.OnProductClickListener
 import com.example.lojinhavirtual.domain.Product
-import javax.inject.Inject
 
 class ProductAdapter(
     private val products: List<Product>,

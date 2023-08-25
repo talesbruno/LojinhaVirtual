@@ -5,42 +5,15 @@ import com.example.lojinhavirtual.R
 import com.example.lojinhavirtual.domain.Category
 import com.example.lojinhavirtual.domain.Product
 import com.example.lojinhavirtual.domain.ProductRepository
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import org.json.JSONObject
 import java.io.BufferedReader
 import java.io.InputStreamReader
-import java.util.Scanner
 import javax.inject.Inject
 
 class ProductRepositoryImpl @Inject constructor(private val context: Context) : ProductRepository {
     override suspend fun getCategories(): List<Category> {
         val jsonString = readJSONFromAssets(context)
         return toCategories(jsonString)
-    }
-
-    override suspend fun getProductForCategory(category: String): List<Product> {
-        val inputStream = context.resources.openRawResource(R.raw.fakedata)
-        val jsonString = Scanner(inputStream).useDelimiter("\\A").next()
-        val gson = Gson()
-
-        // Ajuste para o objeto raiz
-        val jsonObject = JSONObject(jsonString)
-        val categoriasArray = jsonObject.getJSONArray("categorias")
-
-        val categoriasType = object : TypeToken<List<Category>>() {}.type
-        val categorias: List<Category> = gson.fromJson(categoriasArray.toString(), categoriasType)
-
-        val produtosPorCategoria = mutableListOf<Product>()
-
-        for (cat in categorias) {
-            if (cat.name == category) {
-                produtosPorCategoria.addAll(cat.products)
-                break
-            }
-        }
-
-        return produtosPorCategoria
     }
 
     private fun toCategories(jsonAsString: String): List<Category> {

@@ -98,8 +98,12 @@ class HomeFragment : Fragment(), OnProductClickListener {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
             }
             override fun afterTextChanged(s: Editable?) {
-                viewModel.searchProductsByName(s.toString())
-                categoryAdapter.applyFilter(s.toString())
+                if (s.isNullOrBlank()){
+                    viewModel.loadAllCategories()
+                }else{
+                    viewModel.searchProductsByName(s.toString())
+                    categoryAdapter.applyFilter(s.toString())
+                }
             }
         })
     }

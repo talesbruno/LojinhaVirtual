@@ -46,7 +46,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/bg_btn"
         android:backgroundTint="@color/green"
-        android:padding="4dp"
+        android:padding="5dp"
         android:textColor="@color/white"
         android:visibility="gone"
         app:layout_constraintStart_toStartOf="@+id/detail_product_img"
