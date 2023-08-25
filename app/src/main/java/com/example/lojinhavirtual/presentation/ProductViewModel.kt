@@ -55,6 +55,8 @@ class ProductViewModel @Inject constructor(
     }
 
     fun addToCart(amount: Double) {
-
+        val currentTotal = _fakeCart.value ?: 0.0
+        val newTotal = currentTotal + amount
+        _fakeCart.value = newTotal
     }
 }
